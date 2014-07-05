@@ -14,17 +14,18 @@ References:
 <script src="~/Scripts/knockout-3.1.0.js"></script>
 <script src="~/Scripts/ko.table.js"></script>
 <script>
-        // Page View Setup
-        var pageSize = 2;
-        var payload = { name: ko.observable("") };
-        var sortValue = { key: ko.observable("Age"), direction: ko.observable("asc") };
+    // Page View Setup
+    var ajaxUrl = $("#hidPostUrl").val();
+    var pageSize = 2;
+    var payload = { name: ko.observable("") };
+    var sortValue = { key: ko.observable("Age"), direction: ko.observable("asc") };
 
-        function ViewModel(table) {
-            var self = this;
-            self.table = ko.table(pageSize, payload, sortValue);
-        };
+    function ViewModel(table) {
+        var self = this;
+        self.table = ko.table(ajaxUrl, pageSize, payload, sortValue);
+    };
 
-        ko.applyBindings(new ViewModel());
+    ko.applyBindings(new ViewModel());
 </script>
 ```
 
