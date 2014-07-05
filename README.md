@@ -4,7 +4,9 @@ ko.table
 Table for Knockout.  
 I want simple. So, I follow simple. And I want to build simple.  
 For now, just server-side pagination.  
-Will come client-side soon ...
+Will come client-side soon ...   
+
+Note: this is still under crafting.
 
 ***
 Create ko.table:
@@ -19,8 +21,8 @@ size()                | ko.obserable():int   | page size
 data()                | ko.observableArray() | current page data
 recordsTotal()        | ko.obserable():int   | total number of records
 pagesTotal()          | ko.computed():int    | total number of pages
-payload               | obj                  | payload to server
-sortValue             | obj                  | sort value to server
+payload               | callback             | return payload
+sortValue             | callback             | return sort value
 goToPage(targetIndex) | fun                  | page to target index
 onNext()              | fun                  | page to next index
 onPrev()              | fun                  | page to previous index
@@ -38,22 +40,28 @@ References:
 
 **Script**
 ```
-<script src="~/Scripts/knockout-3.1.0.js"></script>
-<script src="~/Scripts/ko.table.js"></script>
-<script>
-    // Page View Setup
-    var ajaxUrl = $("#hidPostUrl").val();
-    var pageSize = 2;
-    var payload = { name: ko.observable("") };
-    var sortValue = { key: ko.observable("Age"), direction: ko.observable("asc") };
+    <script src="~/Scripts/knockout-3.1.0.js"></script>
+    <script src="~/Scripts/ko.table.js"></script>
+    <script>
+        // Page View Setup
+        var ajaxUrl = $("#hidPostUrl").val();
+        var pageSize = 2;
+        var payload = { name: ko.observable("") };
+        var sortValue = { key: ko.observable("Age"), direction: ko.observable("asc") };
+        var payloadCallback = function () {
+            return { name: payload.name() };
+        };
+        var sortValueCallback = function () {
+            return { key: sortValue.key(), direction: sortValue.direction() };
+        };
 
-    function ViewModel(table) {
-        var self = this;
-        self.table = ko.table(ajaxUrl, pageSize, payload, sortValue);
-    };
+        function ViewModel(table) {
+            var self = this;
+            self.table = ko.table(ajaxUrl, pageSize, payloadCallback, sortValueCallback);
+        };
 
-    ko.applyBindings(new ViewModel());
-</script>
+        ko.applyBindings(new ViewModel());
+    </script>
 ```
 
 **Html**
