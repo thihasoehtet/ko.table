@@ -5,9 +5,34 @@ Table for Knockout.
 I want simple. So, I follow simple. And I want to build simple.
 
 ***
+Create ko.table:
+* `ko.table(ajaxUrl, pageSize, payload, sortValue)`
+
+What ko.table have?
+
+Properties            | Type                 | Description
+--------------------- | -------------------  | -------------
+index()               | ko.obserable():int   | current page index
+size()                | ko.obserable():int   | page size
+data()                | ko.observableArray() | current page data
+recordsTotal()        | ko.obserable():int   | total number of records
+pagesTotal()          | ko.computed():int    | total number of pages
+payload               | obj                  | payload to server
+sortValue             | obj                  | sort value to server
+goToPage(targetIndex) | fun                  | page to target index
+onNext()              | fun                  | page to next index
+onPrev()              | fun                  | page to previous index
+hasNext()             | ko.computed():bool   | check next page
+hasPrev()             | ko.computed():bool   | check previous page
+init()                | fun                  | initialize the table
+
+
+***
 References: 
 * [knockout.pager](https://github.com/nathanrobinson/knockout.pager)
 * [knockout-table](https://github.com/mbest/knockout-table)
+
+***
 
 **Script**
 ```
