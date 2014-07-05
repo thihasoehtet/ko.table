@@ -8,7 +8,7 @@ Will come client-side soon ...
 
 Note: 
 * This is still under crafting.
-* Since ko.table is using JSON.stringify() for ajax post, need to reference [json2.js](https://github.com/douglascrockford/JSON-js)
+* Since ko.table is using JSON.stringify() for ajax post, need to reference [json2.js](https://github.com/douglascrockford/JSON-js) for older browser clients.
 
 ***
 Create ko.table:
