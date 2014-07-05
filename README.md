@@ -6,7 +6,9 @@ I want simple. So, I follow simple. And I want to build simple.
 For now, just server-side pagination.  
 Will come client-side soon ...   
 
-Note: this is still under crafting.
+Note: 
+* This is still under crafting.
+* Since ko.table is using JSON.stringify() for ajax post, need to reference [json2.js](https://github.com/douglascrockford/JSON-js)
 
 ***
 Create ko.table:
