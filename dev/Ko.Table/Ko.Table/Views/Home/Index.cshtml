@@ -51,10 +51,16 @@ Total Records: <span data-bind="text: table.recordsTotal"></span>
         var pageSize = 2;
         var payload = { name: ko.observable("") };
         var sortValue = { key: ko.observable("Age"), direction: ko.observable("asc") };
+        var payloadCallback = function () {
+            return { name: payload.name() };
+        };
+        var sortValueCallback = function () {
+            return { key: sortValue.key(), direction: sortValue.direction() };
+        };
 
         function ViewModel(table) {
             var self = this;
-            self.table = ko.table(ajaxUrl, pageSize, payload, sortValue);
+            self.table = ko.table(ajaxUrl, pageSize, payloadCallback, sortValueCallback);
         };
 
         ko.applyBindings(new ViewModel());

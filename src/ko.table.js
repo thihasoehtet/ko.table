@@ -20,8 +20,8 @@
 				data: JSON.stringify({
 					start: (targetIndex - 1) * self.size(),
 					length: self.size(),
-					payload: { name: self.payload.name() },
-					sortValue: { key: sortValue.key(), direction: sortValue.direction() }
+					payload: self.payload(),
+					sortValue: self.sortValue()
 				})
 			})
             .done(function (pagedResult) {
