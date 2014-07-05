@@ -6,15 +6,26 @@ I want simple. So, I follow simple. And I want to build simple.
 For now, just server-side pagination.  
 Will come client-side soon ...   
 
-Note: 
+
+***
+
+**Dependencies:**
+* jquery-1.10.2.js
+* knockout-3.1.0.js
+
+***
+
+**Note:**
 * This is still under crafting.
 * Since ko.table is using JSON.stringify() for ajax post, need to reference [json2.js](https://github.com/douglascrockford/JSON-js) for older browser clients.
 
 ***
-Create ko.table:
+**How to create ko.table?**
+
 * `ko.table(ajaxUrl, pageSize, payload, sortValue)`
 
-What ko.table have?
+
+**What does ko.table have?**
 
 Properties            | Type                 | Description
 --------------------- | -------------------  | -------------
@@ -33,15 +44,11 @@ hasPrev()             | ko.computed():bool   | check previous page
 init()                | fun                  | initialize the table
 
 
-***
-References: 
-* [knockout.pager](https://github.com/nathanrobinson/knockout.pager)
-* [knockout-table](https://github.com/mbest/knockout-table)
+**How to use ko.table?**
 
-***
-
-**Script**
+* Script
 ```
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/knockout-3.1.0.js"></script>
     <script src="~/Scripts/ko.table.js"></script>
     <script>
@@ -57,23 +64,25 @@ References:
             return { key: sortValue.key(), direction: sortValue.direction() };
         };
 
-        function ViewModel(table) {
+        function ViewModel() {
             var self = this;
+            self.payload = payload;
+            self.sortValue = sortValue;
             self.table = ko.table(ajaxUrl, pageSize, payloadCallback, sortValueCallback);
         };
 
         ko.applyBindings(new ViewModel());
-    </script>
 ```
 
-**Html**
+* Html
+
 ```
 
 <label>Name</label>
-<input type="text" data-bind="value: table.payload.name" />
+<input type="text" data-bind="value: payload.name" />
 <button data-bind="click: table.init">Search</button>
 <label>Sort by Age</label>
-<select data-bind="options: ['asc','desc'], value: table.sortValue.direction"></select>
+<select data-bind="options: ['asc','desc'], value: sortValue.direction"></select>
 <button data-bind="click: table.init">Sort</button>
 <hr />
 <table>
@@ -108,7 +117,8 @@ Total Records: <span data-bind="text: table.recordsTotal"></span>
 @Html.Hidden("hidPostUrl", Url.Action("ServerSidePaging"))
 ```
 
-**Server-Side (C# Asp.net Mvc)**
+* Server-Side (C# Asp.net Mvc)
+
 ```
 
 using System;
@@ -190,3 +200,11 @@ namespace Ko.Table.Controllers
     }
 }
 ```
+
+***
+
+
+**Related Plugins:**
+
+* [knockout.pager](https://github.com/nathanrobinson/knockout.pager)
+* [knockout-table](https://github.com/mbest/knockout-table)
