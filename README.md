@@ -1,8 +1,10 @@
 ko.table
 ========
 
-Table for Knockout.
-I want simple. So, I follow simple. And I want to build simple.
+Table for Knockout.  
+I want simple. So, I follow simple. And I want to build simple.  
+For now, just server-side pagination.  
+Will come client-side soon ...
 
 ***
 Create ko.table:
