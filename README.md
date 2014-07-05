@@ -1,10 +1,9 @@
 ko.table
 ========
 
-Table for Knockout.  
-I want simple. So, I follow simple. And I want to build simple.  
-For now, just server-side pagination.  
+For now, only support server-side pagination.  
 Will come client-side soon ...   
+ko.table uses **json** to travel data over network wire.  
 
 
 ***
