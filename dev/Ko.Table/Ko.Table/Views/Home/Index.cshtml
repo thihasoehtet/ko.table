@@ -1,7 +1,64 @@
-﻿
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    ViewBag.Title = "Server-Side";
 }
 
-<h2>Index</h2>
+<h2>Server-Side</h2>
+
+<label>Name</label>
+<input type="text" data-bind="value: table.payload.name" />
+<button data-bind="click: table.init">Search</button>
+<label>Sort by Age</label>
+<select data-bind="options: ['asc','desc'], value: table.sortValue.direction"></select>
+<button data-bind="click: table.init">Sort</button>
+<hr />
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Office</th>
+            <th>Age</th>
+            <th>StartDate</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: table.data">
+        <tr>
+            <td data-bind="text: Id"></td>
+            <td data-bind="text: Name"></td>
+            <td data-bind="text: Position"></td>
+            <td data-bind="text: Office"></td>
+            <td data-bind="text: Age"></td>
+            <td data-bind="text: StartDate"></td>
+        </tr>
+    </tbody>
+</table>
+<hr />
+<button data-bind="click: table.onPrev, enable: table.hasPrev">Prev</button>
+<button data-bind="click: table.onNext, enable: table.hasNext">Next</button>
+
+Page: <span data-bind="text: table.index"></span> of <span data-bind="text: table.pagesTotal"></span> |
+Total Records: <span data-bind="text: table.recordsTotal"></span>
+
+@Html.Hidden("hidPostUrl", Url.Action("ServerSidePaging"))
+
+@section Scripts {
+    <script src="~/Scripts/knockout-3.1.0.js"></script>
+    <script src="~/Scripts/ko.table.js"></script>
+    <script>
+        // Page View Setup
+        var ajaxUrl = $("#hidPostUrl").val();
+        var pageSize = 2;
+        var payload = { name: ko.observable("") };
+        var sortValue = { key: ko.observable("Age"), direction: ko.observable("asc") };
+
+        function ViewModel(table) {
+            var self = this;
+            self.table = ko.table(ajaxUrl, pageSize, payload, sortValue);
+        };
+
+        ko.applyBindings(new ViewModel());
+    </script>
+}
+
 
