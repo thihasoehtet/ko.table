@@ -44,6 +44,16 @@ hasPrev()             | ko.computed():bool   | check previous page
 init()                | fun                  | initialize the table
 
 
+**What does ko.table send to server-side?**
+
+* `{ start: <int>, lenght: <int>, payload: <obj>, sortValue: <obj> }`
+
+
+**What does ko.table expect from server-side?**
+
+* `{ data: [], recordsTotal: <int> }`
+
+
 **How to use ko.table?**
 
 * Script
