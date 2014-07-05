@@ -58,36 +58,35 @@ init()                | fun                  | initialize the table
 
 * Script
 ```
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/knockout-3.1.0.js"></script>
-    <script src="~/Scripts/ko.table.js"></script>
-    <script>
-        // Page View Setup
-        var ajaxUrl = $("#hidPostUrl").val();
-        var pageSize = 2;
-        var payload = { name: ko.observable("") };
-        var sortValue = { key: ko.observable("Age"), direction: ko.observable("asc") };
-        var payloadCallback = function () {
-            return { name: payload.name() };
-        };
-        var sortValueCallback = function () {
-            return { key: sortValue.key(), direction: sortValue.direction() };
-        };
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/knockout-3.1.0.js"></script>
+<script src="~/Scripts/ko.table.js"></script>
+<script>
+    // Page View Setup
+    var ajaxUrl = $("#hidPostUrl").val();
+    var pageSize = 2;
+    var payload = { name: ko.observable("") };
+    var sortValue = { key: ko.observable("Age"), direction: ko.observable("asc") };
+    var payloadCallback = function () {
+        return { name: payload.name() };
+    };
+    var sortValueCallback = function () {
+        return { key: sortValue.key(), direction: sortValue.direction() };
+    };
 
-        function ViewModel() {
-            var self = this;
-            self.payload = payload;
-            self.sortValue = sortValue;
-            self.table = ko.table(ajaxUrl, pageSize, payloadCallback, sortValueCallback);
-        };
+    function ViewModel() {
+        var self = this;
+        self.payload = payload;
+        self.sortValue = sortValue;
+        self.table = ko.table(ajaxUrl, pageSize, payloadCallback, sortValueCallback);
+    };
 
-        ko.applyBindings(new ViewModel());
+    ko.applyBindings(new ViewModel());
 ```
 
-* Html
+* Html (Index.cshtml)
 
 ```
-
 <label>Name</label>
 <input type="text" data-bind="value: payload.name" />
 <button data-bind="click: table.init">Search</button>
@@ -130,7 +129,6 @@ Total Records: <span data-bind="text: table.recordsTotal"></span>
 * Server-Side (C# Asp.net Mvc)
 
 ```
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
