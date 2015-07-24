@@ -211,7 +211,7 @@ namespace Ko.Table.Controllers
 ***
 
 
-**Related Plugins:**
+**Other Knockout Table Paging Plugins:**
 
 * [knockout.pager](https://github.com/nathanrobinson/knockout.pager)
 * [knockout-table](https://github.com/mbest/knockout-table)
